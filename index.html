@@ -37,10 +37,13 @@
 
   body{
     min-height:100vh;
+  }
+
+  .card-section{
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
-    padding:40px 20px;
+    padding:40px 20px 100px;
   }
 
   .card{
@@ -53,9 +56,14 @@
     border:1px solid var(--gold);
     position:relative;
     opacity:0;
-    transform:translateY(14px);
-    animation:reveal 0.9s ease forwards;
+    transform:translateY(24px);
+    transition:opacity 1s ease, transform 1s ease;
     box-shadow:0 20px 60px rgba(74,66,57,0.25);
+  }
+
+  .card.in-view{
+    opacity:1;
+    transform:translateY(0);
   }
 
   .card::before{
@@ -66,12 +74,53 @@
     pointer-events:none;
   }
 
-  @keyframes reveal{
-    to{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .card{ transition:none; opacity:1; transform:none; }
+  }
+
+  /* Intro screen */
+  .intro-section{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:28px;
+    padding:60px 20px;
+  }
+
+  .intro-card{
+    position:relative;
+    width:min(340px, 78vw);
+    aspect-ratio:0.72;
+    background:var(--ivory) url('ocean-seal.jpg') center / cover no-repeat;
+    border:1px solid var(--gold);
+    box-shadow:0 30px 70px rgba(74,66,57,0.35);
+  }
+
+  .scroll-hint{
+    text-align:center;
+    font-size:12px;
+    font-variant:small-caps;
+    letter-spacing:0.14em;
+    color:var(--charcoal);
+  }
+
+  .chevron{
+    display:block;
+    margin-top:8px;
+    font-size:16px;
+    animation:bounce 1.6s infinite;
+  }
+
+  @keyframes bounce{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(6px); }
   }
 
   @media (prefers-reduced-motion: reduce){
-    .card{ animation:none; opacity:1; transform:none; }
+    .chevron{ animation:none; }
   }
 
   .eyebrow{
@@ -154,6 +203,27 @@
     font-size:17px;
     color:var(--green-deep);
     text-align:right;
+  }
+
+  .map-links{
+    display:block;
+    font-family:'Jost', sans-serif;
+    font-size:12px;
+    font-variant:small-caps;
+    letter-spacing:0.04em;
+    margin-top:4px;
+  }
+
+  .map-links a{
+    color:var(--gold);
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+  }
+
+  .map-links a:hover,
+  .map-links a:focus-visible{
+    color:var(--green-deep);
+    border-color:var(--green-deep);
   }
 
   .note{
@@ -292,6 +362,12 @@
 </head>
 <body>
 
+<div class="intro-section">
+  <div class="intro-card"></div>
+  <p class="scroll-hint">Scroll down to view the invitation<span class="chevron">&darr;</span></p>
+</div>
+
+<div class="card-section">
 <div class="card">
   <div class="flourish">
     <svg viewBox="0 0 70 14" fill="none" stroke="currentColor" stroke-width="1">
@@ -313,11 +389,25 @@
     </div>
     <div class="detail-row">
       <span class="detail-label">Church &middot; 9:00 AM</span>
-      <span class="detail-value">Metropolitan Cathedral</span>
+      <span class="detail-value">
+        Metropolitan Cathedral
+        <span class="map-links">
+          <a href="https://www.google.com/maps/search/?api=1&query=13.6283043,123.1871934&query_place_id=ChIJ86OlMUaNoTMRrd8T11UA6i0" target="_blank" rel="noopener">Google Maps</a>
+          &middot;
+          <a href="https://waze.com/ul?ll=13.6283043,123.1871934&navigate=yes" target="_blank" rel="noopener">Waze</a>
+        </span>
+      </span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Lunch &middot; 11:00 AM</span>
-      <span class="detail-value">Grissini Ristorante</span>
+      <span class="detail-value">
+        Grissini Ristorante
+        <span class="map-links">
+          <a href="https://www.google.com/maps/search/?api=1&query=13.6313506,123.1974644&query_place_id=ChIJzwy9hjPzoTMRXGONeER-j28" target="_blank" rel="noopener">Google Maps</a>
+          &middot;
+          <a href="https://waze.com/ul?ll=13.6313506,123.1974644&navigate=yes" target="_blank" rel="noopener">Waze</a>
+        </span>
+      </span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Address</span>
@@ -325,7 +415,7 @@
     </div>
     <div class="detail-row">
       <span class="detail-label">Attire</span>
-      <span class="detail-value">Church Sunday attire &mdash; off-white, cream, champagne, taupe &amp; mushroom tones</span>
+      <span class="detail-value">Semi-formal, polished &amp; modest &mdash; off-white, cream, champagne, taupe &amp; mushroom tones</span>
     </div>
   </div>
 
@@ -337,6 +427,26 @@
     <a href="#" id="registryLink" style="display:block; text-align:center; background:var(--green-deep); color:var(--ivory); border:1px solid var(--green-deep); font-family:'Jost', sans-serif; font-size:14px; font-variant:small-caps; letter-spacing:0.08em; padding:14px 20px; text-decoration:none;">View Gift Registry</a>
   </div>
 </div>
+</div>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const card = document.querySelector('.card');
+
+  if (reduceMotion) {
+    card.classList.add('in-view');
+  } else {
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          card.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(card);
+  }
+</script>
 
 </body>
 </html>
