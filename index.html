@@ -214,6 +214,31 @@
     margin-top:4px;
   }
 
+  .palette{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    padding-top:2px;
+  }
+
+  .swatch{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-family:'Jost', sans-serif;
+    font-size:12px;
+    color:var(--charcoal);
+  }
+
+  .swatch-dot{
+    display:inline-block;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    border:1px solid var(--gold);
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,0.5);
+  }
+
   .map-links a{
     color:var(--gold);
     text-decoration:none;
@@ -413,9 +438,16 @@
       <span class="detail-label">Address</span>
       <span class="detail-value">Magsaysay Ave., Naga City</span>
     </div>
-    <div class="detail-row">
+    <div class="detail-row" style="flex-direction:column; align-items:stretch; gap:10px;">
       <span class="detail-label">Attire</span>
-      <span class="detail-value">Semi-formal, polished &amp; modest &mdash; off-white, cream, champagne, taupe &amp; mushroom tones</span>
+      <span class="detail-value" style="text-align:left;">Semi-formal, polished &amp; modest</span>
+      <div class="palette">
+        <span class="swatch"><span class="swatch-dot" style="background:#F5EFE4;"></span>Off-white</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#EDE1C9;"></span>Cream</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#E9D8B5;"></span>Champagne</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#A99789;"></span>Taupe</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#BBAFA0;"></span>Mushroom</span>
+      </div>
     </div>
   </div>
 
