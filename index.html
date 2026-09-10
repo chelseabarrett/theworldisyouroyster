@@ -206,18 +206,18 @@
   }
 
   .map-links{
-    display:block;
-    font-family:'Jost', sans-serif;
-    font-size:12px;
-    font-variant:small-caps;
-    letter-spacing:0.04em;
-    margin-top:4px;
+    display:flex;
+    gap:8px;
+    margin-top:8px;
+    justify-content:flex-end;
+    flex-wrap:wrap;
   }
 
   .palette{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    row-gap:14px;
+    column-gap:8px;
     padding-top:2px;
   }
 
@@ -240,15 +240,18 @@
   }
 
   .map-links a{
-    color:var(--gold);
-    text-decoration:none;
-    border-bottom:1px solid var(--gold);
+    display:inline-block;
+    color:var(--green-deep);
+    text-decoration:underline;
+    font-family:'Jost', sans-serif;
+    font-size:12px;
+    font-variant:small-caps;
+    letter-spacing:0.06em;
   }
 
   .map-links a:hover,
   .map-links a:focus-visible{
-    color:var(--green-deep);
-    border-color:var(--green-deep);
+    color:var(--charcoal);
   }
 
   .note{
@@ -418,7 +421,6 @@
         Metropolitan Cathedral
         <span class="map-links">
           <a href="https://www.google.com/maps/search/?api=1&query=13.6283043,123.1871934&query_place_id=ChIJ86OlMUaNoTMRrd8T11UA6i0" target="_blank" rel="noopener">Google Maps</a>
-          &middot;
           <a href="https://waze.com/ul?ll=13.6283043,123.1871934&navigate=yes" target="_blank" rel="noopener">Waze</a>
         </span>
       </span>
@@ -429,14 +431,9 @@
         Grissini Ristorante
         <span class="map-links">
           <a href="https://www.google.com/maps/search/?api=1&query=13.6313506,123.1974644&query_place_id=ChIJzwy9hjPzoTMRXGONeER-j28" target="_blank" rel="noopener">Google Maps</a>
-          &middot;
           <a href="https://waze.com/ul?ll=13.6313506,123.1974644&navigate=yes" target="_blank" rel="noopener">Waze</a>
         </span>
       </span>
-    </div>
-    <div class="detail-row">
-      <span class="detail-label">Address</span>
-      <span class="detail-value">Magsaysay Ave., Naga City</span>
     </div>
     <div class="detail-row" style="flex-direction:column; align-items:stretch; gap:10px;">
       <span class="detail-label">Attire</span>
@@ -447,6 +444,9 @@
         <span class="swatch"><span class="swatch-dot" style="background:#E9D8B5;"></span>Champagne</span>
         <span class="swatch"><span class="swatch-dot" style="background:#A99789;"></span>Taupe</span>
         <span class="swatch"><span class="swatch-dot" style="background:#BBAFA0;"></span>Mushroom</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#E8C9C3;"></span>Shell Blush</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#C3D3D6;"></span>Pearl Blue</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#A9C2B4;"></span>Sea Glass Green</span>
       </div>
     </div>
   </div>
@@ -457,6 +457,7 @@
     <h2>Gift Registry</h2>
     <p class="note" style="margin-bottom:24px;">Ocean's gift registry is linked below, should you wish to send a little something.</p>
     <a href="#" id="registryLink" style="display:block; text-align:center; background:var(--green-deep); color:var(--ivory); border:1px solid var(--green-deep); font-family:'Jost', sans-serif; font-size:14px; font-variant:small-caps; letter-spacing:0.08em; padding:14px 20px; text-decoration:none;">View Gift Registry</a>
+    <p class="note" style="margin-top:20px; margin-bottom:0; color:var(--gold);">Monetary gifts may be sent via BPI &mdash; details available upon request.</p>
   </div>
 </div>
 </div>
