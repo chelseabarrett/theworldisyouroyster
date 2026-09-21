@@ -254,6 +254,27 @@
     color:var(--charcoal);
   }
 
+  .calendar-links{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    padding:2px 0 6px;
+  }
+
+  .calendar-links a{
+    color:var(--green-deep);
+    text-decoration:underline;
+    font-family:'Jost', sans-serif;
+    font-size:12px;
+    font-variant:small-caps;
+    letter-spacing:0.06em;
+  }
+
+  .calendar-links a:hover,
+  .calendar-links a:focus-visible{
+    color:var(--charcoal);
+  }
+
   .note{
     text-align:center;
     font-size:15px;
@@ -415,6 +436,10 @@
       <span class="detail-label">Date</span>
       <span class="detail-value">Sunday, October 11, 2026</span>
     </div>
+    <div class="calendar-links">
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ocean%27s%20First%20Birthday%20%26%20Christening&dates=20261011T010000Z/20261011T060000Z&details=Join%20us%20as%20we%20celebrate%20Ocean%27s%20first%20birthday%20and%20christening.&location=Metropolitan%20Cathedral%20%26%20Grissini%20Ristorante%2C%20Naga%20City" target="_blank" rel="noopener">Add to Google Calendar</a>
+      <a href="#" id="icsDownload" download="Oceans-First-Birthday-Christening.ics">Add to Apple/Outlook</a>
+    </div>
     <div class="detail-row">
       <span class="detail-label">Church &middot; 9:00 AM</span>
       <span class="detail-value">
@@ -465,6 +490,25 @@
 
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const icsLink = document.getElementById('icsDownload');
+  if (icsLink) {
+    const icsLines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'BEGIN:VEVENT',
+      'UID:oceans-first-birthday-christening-2026@invitation',
+      'DTSTAMP:20260922T000000Z',
+      'DTSTART:20261011T010000Z',
+      'DTEND:20261011T060000Z',
+      'SUMMARY:Ocean\'s First Birthday & Christening',
+      'DESCRIPTION:Join us as we celebrate Ocean\'s first birthday and christening.',
+      'LOCATION:Metropolitan Cathedral & Grissini Ristorante\\, Naga City',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    icsLink.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsLines);
+  }
 
   const card = document.querySelector('.card');
 
